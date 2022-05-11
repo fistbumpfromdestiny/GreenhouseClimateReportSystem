@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 @Service
 public class HumidityServiceImpl implements HumidityService {
 
@@ -18,4 +19,13 @@ public class HumidityServiceImpl implements HumidityService {
     }
 
 
+    @Override
+    public List<Humidity> findRH(long id) {
+        return humidityRepository.findHumidityByGreenhouseId(id);
+    }
+
+    @Override
+    public Humidity findTopRH(long id) {
+        return humidityRepository.findTopByGreenhouseId(id);
+    }
 }

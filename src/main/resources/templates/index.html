@@ -26,12 +26,12 @@
         <tbody>
         <tr th:each="greenhouse : ${listGreenhouses}">
             <td th:text="${greenhouse.name}"></td>
-            <tr th:text="${listTemperatureA}"></tr>
-            <tr th:text="${listTemperatureB}"></tr>
-            <tr th:text="${listTemperatureC}"></tr>
+            <td th:text="${listTemperatureA.rh}"></td>
+            <td th:text="${listTemperatureB.rh}"></td>
+            <td th:text="${listTemperatureC.rh}"></td></tr>
             <td>
 
-                <a th:href="@{/showReport/{id}(id=${greenhouse.id})}" class="btn btn-primary">Show Summary Report</a>
+               <!-- <a th:href="@{/showReport/{id}(id=${greenhouse.id})}" class="btn btn-primary">Show Summary Report</a>-->
             </td>
         </tr>
         </tbody>

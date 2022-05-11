@@ -1,7 +1,10 @@
 package com.example.greenhouse.service;
 
-import org.springframework.stereotype.Service;
+import com.example.greenhouse.model.Humidity;
 
-@Service
+import java.util.List;
+
 public interface HumidityService {
+    List<Humidity> findRH(long id);
+    Humidity findTopRH(long id);
 }

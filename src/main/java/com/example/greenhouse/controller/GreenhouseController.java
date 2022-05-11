@@ -11,11 +11,13 @@ import org.springframework.web.servlet.ModelAndView;
 public class GreenhouseController {
 
     private final GreenhouseService greenhouseService;
+    private final HumidityService humidityService;
 
 
     @Autowired
-    public GreenhouseController(GreenhouseService greenhouseService) {
+    public GreenhouseController(GreenhouseService greenhouseService, HumidityService humidityService) {
         this.greenhouseService = greenhouseService;
+        this.humidityService = humidityService;
     }
 
 
@@ -24,6 +26,9 @@ public class GreenhouseController {
     public ModelAndView viewHomePage() {
         ModelAndView mav = new ModelAndView("index");
         mav.addObject("listGreenhouses", greenhouseService.getAllGreenhouses());
+        mav.addObject("listTemperatureA", humidityService.findTopRH(1));
+        mav.addObject("listTemperatureB", humidityService.findTopRH(2));
+        mav.addObject("listTemperatureC", humidityService.findTopRH(3));
         return mav;
     }
 }
