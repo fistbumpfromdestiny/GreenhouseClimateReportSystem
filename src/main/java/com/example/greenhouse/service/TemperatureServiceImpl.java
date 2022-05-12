@@ -1,21 +1,22 @@
 package com.example.greenhouse.service;
 
 import com.example.greenhouse.model.Temperature;
+import com.example.greenhouse.repository.TemperatureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TemperatureServiceImpl {
+public class TemperatureServiceImpl implements TemperatureService {
 
-    private final TemperatureService temperatureService;
+    private final TemperatureRepository temperatureRepository;
 
     @Autowired
-    public TemperatureServiceImpl(TemperatureService temperatureService) {
-        this.temperatureService = temperatureService;
+    public TemperatureServiceImpl(TemperatureRepository temperatureRepository) {
+        this.temperatureRepository = temperatureRepository;
     }
 
-
-    Temperature findByGreenhouseID(long id) {
-        return temperatureService.findTopByGreenhouseID(id);
+    @Override
+    public Temperature findTopByGreenhouseID(long id) {
+        return null;
     }
 }
