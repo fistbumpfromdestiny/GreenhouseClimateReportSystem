@@ -1,5 +1,6 @@
 package com.example.greenhouse.controller;
 
+import com.example.greenhouse.model.Monitor;
 import com.example.greenhouse.repository.ElectricityRepository;
 import com.example.greenhouse.service.ElectricityService;
 import com.example.greenhouse.service.GreenhouseService;
@@ -9,6 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class GreenhouseController {
@@ -29,6 +33,11 @@ public class GreenhouseController {
     // Displays list of all employees
     @RequestMapping("/")
     public ModelAndView viewHomePage() {
+        ArrayList<Monitor> monitorList = new ArrayList<>();
+        for(int i = 1; i < greenhouseService.countGreenhouses(); i++){
+        Monitor m = new Monitor();
+        }
+
         ModelAndView mav = new ModelAndView("index");
         mav.addObject("listGreenhouses", greenhouseService.getAllGreenhouses());
         mav.addObject("currPrice", electricityService.currentElectricityPrice());

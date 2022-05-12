@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface GreenhouseService {
     List<Greenhouse> getAllGreenhouses();
+    int countGreenhouses();
+
 }
