@@ -18,14 +18,8 @@ public class HumidityServiceImpl implements HumidityService {
         this.humidityRepository = humidityRepository;
     }
 
-
     @Override
-    public List<Humidity> findRH(long id) {
-        return humidityRepository.findHumidityByGreenhouseId(id);
-    }
-
-    @Override
-    public Humidity findTopRH(long id) {
-        return humidityRepository.findTopByGreenhouseId(id);
+    public Humidity findByGreenhouseID(long id) {
+        return humidityRepository.findTop1ByGreenhouse_IdOrderByDateDesc(id);
     }
 }
