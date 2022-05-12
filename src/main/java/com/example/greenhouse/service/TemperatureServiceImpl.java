@@ -1,5 +1,6 @@
 package com.example.greenhouse.service;
 
+import com.example.greenhouse.model.AverageMeasurement;
 import com.example.greenhouse.model.Temperature;
 import com.example.greenhouse.repository.TemperatureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class TemperatureServiceImpl implements TemperatureService {
     }
 
     @Override
-    public List<?> findDailyAveragePerGH(long id) {
+    public List<AverageMeasurement> findDailyAveragePerGH(long id) {
         return temperatureRepository.avgTempPerDays(id);
     }
 }

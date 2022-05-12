@@ -1,5 +1,6 @@
 package com.example.greenhouse.service;
 
+import com.example.greenhouse.model.AverageMeasurement;
 import com.example.greenhouse.model.Humidity;
 import com.example.greenhouse.repository.HumidityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,11 @@ public class HumidityServiceImpl implements HumidityService {
     @Override
     public double findAveragePerGH(long id) {
         return humidityRepository.averageRHbyGreenhouseID(id);
+    }
+
+    @Override
+    public List<AverageMeasurement> findDailyAveragePerGH(long id) {
+        return humidityRepository.avgHumidityPerDays(id);
     }
 
 

@@ -7,8 +7,8 @@ public class AverageMeasurement {
     double measurement;
     Date date;
 
-    public AverageMeasurement(double temp, Date date) {
-        this.measurement = temp;
+    public AverageMeasurement(double measurement, Date date) {
+        this.measurement = measurement;
         this.date = date;
     }
 

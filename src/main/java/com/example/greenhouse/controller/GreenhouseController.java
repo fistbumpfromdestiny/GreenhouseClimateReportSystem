@@ -66,7 +66,7 @@ public class GreenhouseController {
 
         ModelAndView mav = new ModelAndView("showreport");
         mav.addObject("tempReport", temperatureService.findDailyAveragePerGH(id));
-
+        mav.addObject("humidityReport", humidityService.findDailyAveragePerGH(id));
         return mav;
     }
 }

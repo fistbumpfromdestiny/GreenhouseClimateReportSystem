@@ -18,10 +18,10 @@ public interface TemperatureRepository extends JpaRepository<Temperature, Long> 
     double averageTempByGreenhouseID(@Param("id") long id);
 
 
-    @Query("SELECT new com.example.greenhouse.model.AverageMeasurement(AVG(t.temp), DATE(t.date)) " +
-            "FROM Temperature t " +
-            "WHERE t.greenhouse.id = :id " +
-            "GROUP BY DATE(t.date)")
+    @Query("SELECT new com.example.greenhouse.model.AverageMeasurement(AVG(temp), DATE(date)) " +
+            "FROM Temperature " +
+            "WHERE greenhouse.id = :id " +
+            "GROUP BY DATE(date)")
     List<AverageMeasurement> avgTempPerDays(@Param("id") long id);
 }
 
