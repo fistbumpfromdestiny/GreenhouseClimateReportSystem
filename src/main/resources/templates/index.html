@@ -28,6 +28,17 @@
 
         </tr>
         </tbody>
+         <thead>
+         <tr>
+             <th>Electricity Spot price, SEK/kWh</th>
+             <th>Action</th>
+         </tr>
+         </thead>
+         <tbody>
+
+         <td th:text="${currPrice.getPrice}">
+         <td> <a th:href="@{/updateSpotPrice}" class="btn btn-primary">Update</a>
+         </tbody>
     </table>
 </div>
 </body>

@@ -17,6 +17,6 @@ public class TemperatureServiceImpl implements TemperatureService {
 
     @Override
     public Temperature findTopByGreenhouseID(long id) {
-        return null;
+        return temperatureRepository.findTop1ByGreenhouse_IdOrderByDateDesc(id);
     }
 }

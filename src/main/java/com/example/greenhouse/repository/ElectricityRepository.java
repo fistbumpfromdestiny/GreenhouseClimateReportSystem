@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ElectricityRepository extends JpaRepository<Electricity, Long> {
 
+    Electricity findTopByOrderByIdDesc();
+
 }

@@ -1,5 +1,7 @@
 package com.example.greenhouse.controller;
 
+import com.example.greenhouse.repository.ElectricityRepository;
+import com.example.greenhouse.service.ElectricityService;
 import com.example.greenhouse.service.GreenhouseService;
 import com.example.greenhouse.service.HumidityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +15,15 @@ public class GreenhouseController {
 
     private final GreenhouseService greenhouseService;
     private final HumidityService humidityService;
+    private final ElectricityService electricityService;
 
 
     @Autowired
-    public GreenhouseController(GreenhouseService greenhouseService, HumidityService humidityService) {
+    public GreenhouseController(GreenhouseService greenhouseService, HumidityService humidityService,
+                                ElectricityRepository electricityRepository, ElectricityService electricityService) {
         this.greenhouseService = greenhouseService;
         this.humidityService = humidityService;
+        this.electricityService = electricityService;
     }
 
     // Displays list of all employees
@@ -26,13 +31,14 @@ public class GreenhouseController {
     public ModelAndView viewHomePage() {
         ModelAndView mav = new ModelAndView("index");
         mav.addObject("listGreenhouses", greenhouseService.getAllGreenhouses());
-
+        mav.addObject("currPrice", electricityService.currentElectricityPrice());
         return mav;
     }
     @RequestMapping("/showReport/{id}")
     public ModelAndView showReport(@PathVariable(value="id") long id) {
         ModelAndView mav = new ModelAndView("showreport");
         mav.addObject("report", humidityService.findByGreenhouseID(id));
+
         return mav;
 
     }

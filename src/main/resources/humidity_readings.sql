@@ -1,1 +1,1 @@
-select * from greenhouse.temperature_readings;
+select * from greenhouse.electricity_price;
