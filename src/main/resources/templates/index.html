@@ -19,6 +19,9 @@
             <th>Greenhouse Name</th>
             <th>Current Temperature</th>
             <th>Current Humidity</th>
+            <th>Average Temperature</th>
+            <th>Average Humidity</th>
+
             <th> Actions </th>
         </tr>
         </thead>
@@ -27,6 +30,8 @@
             <td th:text="${greenhouse.getName}"></td>
             <td th:text="${greenhouse.getTemp}"></td>
             <td th:text="${greenhouse.getRh}"></td>
+            <td th:text="${greenhouse.getAvg_temp}"></td>
+            <td th:text="${greenhouse.getAvg_rh}"></td>
             <td><a th:href="@{/showReport/{id}(id=${greenhouse.getId})}" class="btn btn-primary">Show Summary Report</a></td>
         </tr>
         </tbody>

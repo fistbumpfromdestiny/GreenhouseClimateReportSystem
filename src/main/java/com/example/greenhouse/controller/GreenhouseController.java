@@ -39,15 +39,20 @@ public class GreenhouseController {
     // Displays list of all employees
     @RequestMapping("/")
     public ModelAndView viewHomePage() {
+
         ArrayList<Greenhouse> greenhouses = (ArrayList<Greenhouse>) greenhouseService.getAllGreenhouses();
         ArrayList<Monitor> monitorList = new ArrayList<>();
+
         int size = greenhouses.size();
-        for(int i = 0; i < size; i++){
+        for(int i = 0; i < size; i++) {
+
             Monitor m = new Monitor();
             m.setId(greenhouses.get(i).getId());
             m.setName(greenhouses.get(i).getName());
             m.setRh(humidityService.findTop1ByGreenhouseID(i+1).getRh());
             m.setTemp(temperatureService.findTop1ByGreenhouseID(i+1).getTemp());
+            m.setAvg_rh(humidityService.findAveragePerGH(greenhouses.get(i).getId()));
+            m.setAvg_temp(temperatureService.findAveragePerGH(greenhouses.get(i).getId()));
             monitorList.add(m);
         }
 
@@ -58,10 +63,10 @@ public class GreenhouseController {
     }
     @RequestMapping("/showReport/{id}")
     public ModelAndView showReport(@PathVariable(value="id") long id) {
+
         ModelAndView mav = new ModelAndView("showreport");
-        mav.addObject("report", humidityService.findTop1ByGreenhouseID(id));
+        mav.addObject("tempReport", temperatureService.findDailyAveragePerGH(id));
 
         return mav;
-
     }
 }

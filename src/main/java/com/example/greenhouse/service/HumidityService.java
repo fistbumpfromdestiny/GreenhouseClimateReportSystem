@@ -5,5 +5,6 @@ import com.example.greenhouse.model.Humidity;
 public interface HumidityService {
 
     Humidity findTop1ByGreenhouseID(long id);
+    double findAveragePerGH(long id);
 
 }

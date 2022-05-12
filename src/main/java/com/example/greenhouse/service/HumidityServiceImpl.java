@@ -22,4 +22,11 @@ public class HumidityServiceImpl implements HumidityService {
     public Humidity findTop1ByGreenhouseID(long id) {
         return humidityRepository.findTop1ByGreenhouse_IdOrderByDateDesc(id);
     }
+
+    @Override
+    public double findAveragePerGH(long id) {
+        return humidityRepository.averageRHbyGreenhouseID(id);
+    }
+
+
 }
