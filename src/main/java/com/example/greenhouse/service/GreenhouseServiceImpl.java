@@ -22,9 +22,4 @@ public class GreenhouseServiceImpl implements GreenhouseService {
         return greenhouseRepository.findAll();
     }
 
-
-    public int countGreenhouses() {
-        return greenhouseRepository.countGreenhouses();
-    }
-
 }

@@ -1,10 +1,12 @@
 package com.example.greenhouse.controller;
 
+import com.example.greenhouse.model.Greenhouse;
 import com.example.greenhouse.model.Monitor;
 import com.example.greenhouse.repository.ElectricityRepository;
 import com.example.greenhouse.service.ElectricityService;
 import com.example.greenhouse.service.GreenhouseService;
 import com.example.greenhouse.service.HumidityService;
+import com.example.greenhouse.service.TemperatureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 public class GreenhouseController {
@@ -20,33 +21,45 @@ public class GreenhouseController {
     private final GreenhouseService greenhouseService;
     private final HumidityService humidityService;
     private final ElectricityService electricityService;
+    private final TemperatureService temperatureService;
 
 
     @Autowired
-    public GreenhouseController(GreenhouseService greenhouseService, HumidityService humidityService,
-                                ElectricityRepository electricityRepository, ElectricityService electricityService) {
+    public GreenhouseController(GreenhouseService greenhouseService,
+                                HumidityService humidityService,
+                                ElectricityService electricityService,
+                                TemperatureService temperatureService) {
+
         this.greenhouseService = greenhouseService;
         this.humidityService = humidityService;
         this.electricityService = electricityService;
+        this.temperatureService = temperatureService;
     }
 
     // Displays list of all employees
     @RequestMapping("/")
     public ModelAndView viewHomePage() {
+        ArrayList<Greenhouse> greenhouses = (ArrayList<Greenhouse>) greenhouseService.getAllGreenhouses();
         ArrayList<Monitor> monitorList = new ArrayList<>();
-        for(int i = 1; i < greenhouseService.countGreenhouses(); i++){
-        Monitor m = new Monitor();
+        int size = greenhouses.size();
+        for(int i = 0; i < size; i++){
+            Monitor m = new Monitor();
+            m.setId(greenhouses.get(i).getId());
+            m.setName(greenhouses.get(i).getName());
+            m.setRh(humidityService.findTop1ByGreenhouseID(i+1).getRh());
+            m.setTemp(temperatureService.findTop1ByGreenhouseID(i+1).getTemp());
+            monitorList.add(m);
         }
 
         ModelAndView mav = new ModelAndView("index");
-        mav.addObject("listGreenhouses", greenhouseService.getAllGreenhouses());
+        mav.addObject("monitor", monitorList);
         mav.addObject("currPrice", electricityService.currentElectricityPrice());
         return mav;
     }
     @RequestMapping("/showReport/{id}")
     public ModelAndView showReport(@PathVariable(value="id") long id) {
         ModelAndView mav = new ModelAndView("showreport");
-        mav.addObject("report", humidityService.findByGreenhouseID(id));
+        mav.addObject("report", humidityService.findTop1ByGreenhouseID(id));
 
         return mav;
 

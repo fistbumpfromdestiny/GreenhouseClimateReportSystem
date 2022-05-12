@@ -2,11 +2,20 @@ package com.example.greenhouse.model;
 
 public class Monitor {
 
+    private long id;
     private String name;
     private double rh;
     private double temp;
 
     public Monitor() {}
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

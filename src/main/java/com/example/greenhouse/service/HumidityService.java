@@ -4,5 +4,6 @@ import com.example.greenhouse.model.Humidity;
 
 public interface HumidityService {
 
-    Humidity findByGreenhouseID(long id);
+    Humidity findTop1ByGreenhouseID(long id);
+
 }
