@@ -18,18 +18,29 @@
     <thead>
     <tr>
       <th>Daily Average Temperature</th>
-      <th>Measurement taken</th>
+      <th>Measurements taken</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="temperature: ${tempReport}">
       <td th:text="${temperature.measurement}"></td>
       <td th:text="${temperature.date}"></td>
-
+    </tbody>
+    <thead>
+    <tr>
+      <th>Daily Average Humidity</th>
+      <th>Measurements taken</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="humidity: ${humidityReport}">
+      <td th:text="${humidity.measurement}"></td>
+      <td th:text="${humidity.date}"></td>
+    </tbody>
 
       <td><a th:href="@{/}" class="btn btn-primary">Back</a></td>
 
-    </tbody>
+
   </table>
 </div>
 </body>

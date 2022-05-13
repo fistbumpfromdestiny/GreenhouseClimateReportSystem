@@ -14,9 +14,13 @@ public interface TemperatureRepository extends JpaRepository<Temperature, Long> 
 
     Temperature findTop1ByGreenhouse_IdOrderByDateDesc(long id);
 
+    // Query for total average independent of date
+
     @Query(value = "SELECT avg(temp) FROM Temperature WHERE greenhouse.id = :id" )
     double averageTempByGreenhouseID(@Param("id") long id);
 
+    /* Query for average temperature grouped by day. Casts to DATE to disregard time differences
+     * within same dates */
 
     @Query("SELECT new com.example.greenhouse.model.AverageMeasurement(AVG(temp), DATE(date)) " +
             "FROM Temperature " +

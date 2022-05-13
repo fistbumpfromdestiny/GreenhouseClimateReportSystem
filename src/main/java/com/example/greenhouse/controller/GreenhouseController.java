@@ -23,7 +23,6 @@ public class GreenhouseController {
     private final ElectricityService electricityService;
     private final TemperatureService temperatureService;
 
-
     @Autowired
     public GreenhouseController(GreenhouseService greenhouseService,
                                 HumidityService humidityService,
@@ -36,7 +35,11 @@ public class GreenhouseController {
         this.temperatureService = temperatureService;
     }
 
-    // Displays list of all employees
+    /*
+     * Returns an object with all the greenhouses' information, including the latest recorded
+     * measurement for humidity and temperature as well as the total average of all records to
+     * be displayed on the index page.
+     */
     @RequestMapping("/")
     public ModelAndView viewHomePage() {
 
@@ -44,16 +47,17 @@ public class GreenhouseController {
         ArrayList<Monitor> monitorList = new ArrayList<>();
 
         int size = greenhouses.size();
+
         for(int i = 0; i < size; i++) {
 
-            Monitor m = new Monitor();
-            m.setId(greenhouses.get(i).getId());
-            m.setName(greenhouses.get(i).getName());
-            m.setRh(humidityService.findTop1ByGreenhouseID(i+1).getRh());
-            m.setTemp(temperatureService.findTop1ByGreenhouseID(i+1).getTemp());
-            m.setAvg_rh(humidityService.findAveragePerGH(greenhouses.get(i).getId()));
-            m.setAvg_temp(temperatureService.findAveragePerGH(greenhouses.get(i).getId()));
-            monitorList.add(m);
+            Monitor monitor = new Monitor();
+            monitor.setId(greenhouses.get(i).getId());
+            monitor.setName(greenhouses.get(i).getName());
+            monitor.setRh(humidityService.findTop1ByGreenhouseID(i+1).getRh());
+            monitor.setTemp(temperatureService.findTop1ByGreenhouseID(i+1).getTemp());
+            monitor.setAvg_rh(humidityService.findAveragePerGH(greenhouses.get(i).getId()));
+            monitor.setAvg_temp(temperatureService.findAveragePerGH(greenhouses.get(i).getId()));
+            monitorList.add(monitor);
         }
 
         ModelAndView mav = new ModelAndView("index");
@@ -61,6 +65,8 @@ public class GreenhouseController {
         mav.addObject("currPrice", electricityService.currentElectricityPrice());
         return mav;
     }
+
+
     @RequestMapping("/showReport/{id}")
     public ModelAndView showReport(@PathVariable(value="id") long id) {
 
